@@ -1,6 +1,7 @@
 export enum INPUT_TYPE {
-  ITEM = 'item',
-  CATEGORY = 'category',
+  ITEM = 'ITEM',
+  CATEGORY = 'CATEGORY',
+  ADD_ITEM = 'ADD_ITEM',
 }
 
 export interface IInputContainerStyled {

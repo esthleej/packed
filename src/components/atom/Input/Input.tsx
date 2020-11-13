@@ -8,7 +8,7 @@ import React, {
   Dispatch,
 } from 'react';
 import Button from '../Button/Button';
-import { IInputContainerStyled, IInputProps } from './InputTypes';
+import { INPUT_TYPE, IInputContainerStyled, IInputProps } from './InputTypes';
 
 import styled from 'styled-components';
 
@@ -77,19 +77,20 @@ const Input = ({
   };
 
   return (
-    <InputContainer onSubmit={handleSubmit} item={type === 'item'}>
+    <InputContainer onSubmit={handleSubmit} item={type === INPUT_TYPE.ITEM}>
       <input
-        placeholder={type === 'category' ? 'Add a category' : 'Add an item'}
+        placeholder={
+          type === INPUT_TYPE.CATEGORY ? 'Add a category' : 'Add an item'
+        }
         onChange={handleChange}
         value={value}
-        // task={value}
         id={id}
       />
 
-      {type !== 'item' ? (
+      {type !== INPUT_TYPE.ITEM ? (
         <div className='input-bottom'>
           <Button onClick={handleSubmit} primary disabled={value === ''}>
-            {type === 'category' ? 'Add category' : 'Add item'}
+            {type === INPUT_TYPE.CATEGORY ? 'Add category' : 'Add item'}
           </Button>
           <Button
             style={{
