@@ -7,7 +7,6 @@ export enum Constants {
   ADD_TRAVEL_ITEM = 'ADD_TRAVEL_ITEM',
   EDIT_TRAVEL_ITEM = 'EDIT_TRAVEL_ITEM',
   DELETE_TRAVEL_ITEM = 'DELETE_TRAVEL_ITEM',
-  REORDER_TRAVEL_ITEM = 'REORDER_TRAVEL_ITEM',
   ADD_TRAVEL_CATEGORY = 'ADD_TRAVEL_CATEGORY',
   EDIT_TRAVEL_INFO = 'EDIT_TRAVEL_INFO',
 }
@@ -34,11 +33,6 @@ export interface IDeleteTravelItem {
   payload: { category: ISelectedCategory; item: ISelectedItem };
 }
 
-// export interface IReorderTravelItem {
-//   type: Constants.REORDER_TRAVEL_ITEM;
-//   payload: ISelectedItem;
-// }
-
 export interface IAddTravelCategory {
   type: Constants.ADD_TRAVEL_CATEGORY;
   payload: string;
@@ -54,14 +48,6 @@ export type Actions =
   | IDeleteTravelItem
   | IAddTravelCategory
   | IEditTravelInfo;
-//   | IReorderTravelItem
-
-export interface ITravelInfoFlight {
-  airline: string;
-  departure: string;
-  arrival: string;
-  terminal: string;
-}
 
 export interface ITravelInfo {
   destination: string;
@@ -70,15 +56,22 @@ export interface ITravelInfo {
   to: ITravelInfoFlight;
 }
 
-export interface IListItemDetail {
-  item: string;
-  isCompleted: boolean;
-  id: number;
+export interface ITravelInfoFlight {
+  airline: string;
+  departure: string;
+  arrival: string;
+  terminal: string;
 }
 
 export interface IListItem {
   category: string;
   list: IListItemDetail[];
+}
+
+export interface IListItemDetail {
+  item: string;
+  isCompleted: boolean;
+  id: number;
 }
 
 export interface ITravelState {

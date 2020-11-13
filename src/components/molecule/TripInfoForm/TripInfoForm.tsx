@@ -133,7 +133,7 @@ const TripInfoForm = ({
             />
           </h3>
           <h3>
-            <strong>Terminal#:&nbsp;</strong>
+            <strong>Terminal:&nbsp;</strong>
             <input
               type='text'
               id='from-terminal'
@@ -176,7 +176,7 @@ const TripInfoForm = ({
             />
           </h3>
           <h3>
-            <strong>Terminal#:&nbsp;</strong>
+            <strong>Terminal:&nbsp;</strong>
             <input
               type='text'
               id='to-terminal'

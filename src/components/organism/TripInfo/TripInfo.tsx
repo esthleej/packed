@@ -115,7 +115,7 @@ const TripInfo = ({ travelInfo, editTravelInfo }: ITripInfo): ReactElement => {
                   {travelInfoValue.from.arrival}
                 </h3>
                 <h3>
-                  <strong>Terminal#:&nbsp;</strong>
+                  <strong>Terminal:&nbsp;</strong>
                   {travelInfoValue.from.terminal}
                 </h3>
               </div>
@@ -133,7 +133,7 @@ const TripInfo = ({ travelInfo, editTravelInfo }: ITripInfo): ReactElement => {
                   {travelInfoValue.to.arrival}
                 </h3>
                 <h3>
-                  <strong>Terminal#:&nbsp;</strong>
+                  <strong>Terminal:&nbsp;</strong>
                   {travelInfoValue.to.terminal}
                 </h3>
               </div>

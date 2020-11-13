@@ -60,10 +60,3 @@ export const editTravelInfo = (travelInfo: ITravelInfo): IEditTravelInfo => {
     payload: travelInfo,
   };
 };
-
-// export const reorderTravelItem = (category, item) => {
-//   return {
-//     type: REORDER_TRAVEL_ITEM,
-//     payload: { category, item },
-//   };
-// };

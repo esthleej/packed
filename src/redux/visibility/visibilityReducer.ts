@@ -2,12 +2,10 @@ import { Actions, Constants, IVisibilityState } from './visibilityTypes';
 
 const initState = {
   isDeleteModalVisible: false,
-
   selectedCategory: {
     name: '',
     index: 0,
   },
-
   selectedItem: {
     id: '',
     name: '',

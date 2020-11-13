@@ -20,7 +20,7 @@ const initState = {
       airline: 'Korean Air',
       departure: '5:42 a.m.',
       arrival: '12:30 p.m.',
-      terminal: 'H4',
+      terminal: 'D4',
     },
   },
   lists: [
@@ -94,15 +94,6 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
         ...state,
         lists,
       };
-
-    // case REORDER_TRAVEL_ITEM:
-    //   let copyList = Array.from(state.tasks);
-    //   const [removed] = copyList.splice(action.payload.startIndex, 1);
-    //   copyList.splice(action.payload.endIndex, 0, removed);
-    //   return {
-    //     ...state,
-    //     tasks: copyList,
-    //   };
 
     case Constants.ADD_TRAVEL_CATEGORY:
       const newCategory: IListItem = {
