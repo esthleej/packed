@@ -105,20 +105,20 @@ const Item = ({
     Dispatch<SetStateAction<boolean>>
   ] = useState<boolean>(checked);
 
-  const handleSelect = () => {
+  const handleSelect = (): void => {
     setSelectedItem({ name: item, id, index });
     setSelectedCategory(category);
   };
 
-  const handleDeleteVisibility = () => {
+  const handleDeleteVisibility = (): void => {
     setDeleteModalVisibility(true);
   };
 
   const handleEditVisibility = (): void => {
-    handleInputOpen(false);
+    handleInputOpen(false, '');
   };
 
-  const handleCheckItem = () => {
+  const handleCheckItem = (): void => {
     editTravelItem(
       category,
       { name: item, id },
@@ -130,7 +130,7 @@ const Item = ({
     setCompleted(!isCompleted);
   };
 
-  const handleEditItem = (value: string) => {
+  const handleEditItem = (value: string): void => {
     editTravelItem(selectedCategory, selectedItem, {
       item: value,
       isCompleted,
@@ -157,7 +157,7 @@ const Item = ({
           onClick={handleCheckItem}
           defaultChecked={isCompleted}
         />
-        <label htmlFor={id}></label>
+        <label htmlFor={id} />
       </CheckBox>
 
       <Text strikeThrough={isCompleted} onClick={handleSelect}>

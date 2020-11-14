@@ -12,7 +12,7 @@ export interface IInputProps {
   type: INPUT_TYPE;
   id: string;
   text?: string;
-  handleCancel: (value?: any) => void;
-  handleEnter: (value?: any) => void;
+  handleCancel: (value?: boolean) => void;
+  handleEnter: (value: string) => void;
   onClick?: () => void;
 }

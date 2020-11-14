@@ -4,9 +4,10 @@ import Button from '../../atom/Button/Button';
 import styled from 'styled-components';
 
 import {
-  IEditTravelInfo,
   ITravelInfo,
+  ITravelInfoFlight,
 } from '../../../redux/travel/travelTypes';
+import { ITripInfoForm } from './TripInfoFormTypes';
 
 const TripInfoFormContainer = styled.form`
   margin: 1rem;
@@ -30,36 +31,30 @@ const TripInfoFormContainer = styled.form`
   }
 `;
 
-interface TripInfoForm {
-  travelInfo: ITravelInfo;
-  editTravelInfo: (travelInfo: ITravelInfo) => IEditTravelInfo;
-  travelInfoValue: ITravelInfo;
-  setTravelInfoValue: (travelInfo: ITravelInfo) => void;
-  setEditOpen: (isOpen: boolean) => void;
-}
 const TripInfoForm = ({
   travelInfo,
   editTravelInfo,
   travelInfoValue,
   setTravelInfoValue,
   setEditOpen,
-}: TripInfoForm): ReactElement => {
+}: ITripInfoForm): ReactElement => {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
-    field: string,
+    field: keyof ITravelInfo,
     subField?: string
   ): void => {
     if (subField) {
       setTravelInfoValue({
         ...travelInfoValue,
         [field]: {
-          ...travelInfoValue[field],
+          ...(travelInfoValue[field] as ITravelInfoFlight),
           [subField]: e.target.value,
         },
       });
-    } else {
+    }
+    if (!subField) {
       setTravelInfoValue({
-        ...travelInfoValue,
+        ...(travelInfoValue as ITravelInfo),
         [field]: e.target.value,
       });
     }

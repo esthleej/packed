@@ -14,11 +14,11 @@ export interface ITextStyled {
 export interface IItemProps {
   category: ISelectedCategory;
   index: number;
-  id: string | number;
+  id: string;
   item: string;
   checked: boolean;
 
-  handleInputOpen: (isOpen: boolean, id?: string) => void;
+  handleInputOpen: (isAddItemOpen: boolean, id: string) => void;
   handleInputClose: () => void;
 
   selectedCategory: ISelectedCategory;

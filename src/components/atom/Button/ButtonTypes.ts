@@ -6,7 +6,7 @@ export interface IButtonStyled {
 }
 
 export interface IButtonProps {
-  onClick: (e?: any) => void;
+  onClick?: (e?: any) => void | Promise<void>;
   primary?: boolean;
   color?: string;
   disabled?: boolean;

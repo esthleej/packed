@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 import {
   Actions,
   Constants,
@@ -27,14 +29,14 @@ const initState = {
     {
       category: 'clothes',
       list: [
-        { item: '5 shirts', isCompleted: false, id: Date.now() + 1 },
-        { item: '2 pants', isCompleted: false, id: Date.now() + 2 },
-        { item: '1 cap', isCompleted: false, id: Date.now() + 3 },
+        { item: '5 shirts', isCompleted: false, id: uuidv4() },
+        { item: '2 pants', isCompleted: false, id: uuidv4() },
+        { item: '1 cap', isCompleted: false, id: uuidv4() },
       ],
     },
     {
       category: 'electronics',
-      list: [{ item: 'hair dryer', isCompleted: false, id: Date.now() + 4 }],
+      list: [{ item: 'hair dryer', isCompleted: false, id: uuidv4() }],
     },
   ],
 };
@@ -45,7 +47,7 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
   switch (actions.type) {
     case Constants.ADD_TRAVEL_ITEM:
       const newItem: IListItemDetail = {
-        id: Date.now(),
+        id: uuidv4(),
         item: actions.payload.item,
         isCompleted: false,
       };

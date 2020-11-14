@@ -1,4 +1,10 @@
-import React, { Fragment, ReactElement, useState } from 'react';
+import React, {
+  Dispatch,
+  Fragment,
+  ReactElement,
+  SetStateAction,
+  useState,
+} from 'react';
 import { connect } from 'react-redux';
 
 import Input from '../../atom/Input/Input';
@@ -92,8 +98,15 @@ const List = ({
   addTravelItem,
   editTravelItem,
 }: IListProps): ReactElement => {
-  const [isAccordionOpen, setAccodionOpen] = useState(true);
-  const [inputHeight, setInputHeight] = useState(0);
+  const [isAccordionOpen, setAccodionOpen]: [
+    boolean,
+    Dispatch<SetStateAction<boolean>>
+  ] = useState<boolean>(true);
+
+  const [inputHeight, setInputHeight]: [
+    number,
+    Dispatch<SetStateAction<number>>
+  ] = useState<number>(0);
 
   const heightWithInput = (list.length + 1) * 50 + inputHeight;
   const defaultHeight = (list.length + 1) * 50;
@@ -102,7 +115,7 @@ const List = ({
   const completedItems = list.filter(({ isCompleted }) => isCompleted === true)
     .length;
 
-  const handleInputOpen = (isAddItemOpen: boolean, item?: string): void => {
+  const handleInputOpen = (isAddItemOpen: boolean, item: string): void => {
     if (isAddItemOpen) {
       setInputHeight(75);
       setSelectedItem({ name: item });
@@ -131,27 +144,29 @@ const List = ({
     }
   };
 
-  const item = list.map(({ item, isCompleted, id }, index) => (
-    <Fragment key={id}>
-      <Item
-        category={category}
-        id={id}
-        item={item}
-        index={index}
-        handleInputOpen={handleInputOpen}
-        handleInputClose={handleInputClose}
-        checked={isCompleted}
-        isDeleteModalVisible={isDeleteModalVisible}
-        setDeleteModalVisibility={setDeleteModalVisibility}
-        editTravelItem={editTravelItem}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
-      <hr />
-    </Fragment>
-  ));
+  const item = list.map(({ item, isCompleted, id }, index) => {
+    return (
+      <Fragment key={id}>
+        <Item
+          category={category}
+          id={id}
+          item={item}
+          index={index}
+          handleInputOpen={handleInputOpen}
+          handleInputClose={handleInputClose}
+          checked={isCompleted}
+          isDeleteModalVisible={isDeleteModalVisible}
+          setDeleteModalVisibility={setDeleteModalVisibility}
+          editTravelItem={editTravelItem}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
+        <hr />
+      </Fragment>
+    );
+  });
 
   return (
     <ListContainer

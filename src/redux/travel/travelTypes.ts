@@ -71,7 +71,7 @@ export interface IListItem {
 export interface IListItemDetail {
   item: string;
   isCompleted: boolean;
-  id: number;
+  id: string;
 }
 
 export interface ITravelState {
