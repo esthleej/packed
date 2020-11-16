@@ -18,11 +18,15 @@ const ModalContainer = styled.div`
   z-index: 999;
 
   .content {
-    margin: 15% auto;
-    width: 50vw;
+    margin: 15% auto !important;
+    width: 100vw;
     padding: 2rem !important;
     position: relative;
     background-color: white;
+
+    @media (min-width: 400px) {
+      width: 50vw;
+    }
 
     .content-btns {
       display: flex;
@@ -46,13 +50,14 @@ const Modal = ({
         {children}
         {type === MODAL_TYPE.WITH_DEFAULT_BUTTONS && (
           <div className='content-btns'>
-            <Button primary onClick={handleEnter}>
+            <Button primary onClick={handleEnter} type='submit'>
               {button}
             </Button>
             <Button
               style={{
                 marginLeft: '2rem',
               }}
+              type='button'
               onClick={handleCancel}
             >
               Cancel

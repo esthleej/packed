@@ -1,17 +1,18 @@
 export enum INPUT_TYPE {
-  ITEM = 'ITEM',
-  CATEGORY = 'CATEGORY',
-  ADD_ITEM = 'ADD_ITEM',
+  DEFAULT = 'DEFAULT',
+  SECONDARY = 'SECONDARY',
 }
 
 export interface IInputContainerStyled {
-  item: boolean;
+  default: boolean;
 }
 
 export interface IInputProps {
   type: INPUT_TYPE;
   id: string;
   text?: string;
+  placeholder: string;
+  buttonText: string;
   handleCancel: (value?: boolean) => void;
   handleEnter: (value: string) => void;
   onClick?: () => void;

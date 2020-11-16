@@ -12,4 +12,5 @@ export interface IButtonProps {
   disabled?: boolean;
   style?: CSSProperties | undefined;
   children: ReactNode;
+  type: 'button' | 'submit' | 'reset';
 }

@@ -6,11 +6,13 @@ import {
 import {
   Constants,
   IAddTravelCategory,
+  IEditTravelCategory,
+  IDeleteTravelCategory,
   IAddTravelItem,
   IDeleteTravelItem,
-  IEditTravelInfo,
   IEditTravelItem,
   ITravelInfo,
+  IEditTravelInfo,
 } from './travelTypes';
 
 export const addTravelItem = (
@@ -50,6 +52,25 @@ export const deleteTravelItem = (
 export const addTravelCategory = (category: string): IAddTravelCategory => {
   return {
     type: Constants.ADD_TRAVEL_CATEGORY,
+    payload: category,
+  };
+};
+
+export const editTravelCategory = (
+  category: ISelectedCategory,
+  newCategory: string
+): IEditTravelCategory => {
+  return {
+    type: Constants.EDIT_TRAVEL_CATEGORY,
+    payload: { category, newCategory },
+  };
+};
+
+export const deleteTravelCategory = (
+  category: ISelectedCategory
+): IDeleteTravelCategory => {
+  return {
+    type: Constants.DELETE_TRAVEL_CATEGORY,
     payload: category,
   };
 };

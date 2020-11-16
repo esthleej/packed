@@ -1,11 +1,15 @@
 import {
   IAddTravelCategory,
+  IDeleteTravelCategory,
   IDeleteTravelItem,
+  IEditTravelCategory,
   IListItem,
 } from '../../../redux/travel/travelTypes';
 
 import {
-  IDeleteModalVisibility,
+  ISetEditCategoryModalVisibility,
+  ISetDeleteItemModalVisibility,
+  ISetDeleteCategoryModalVisibility,
   ISelectedCategory,
   ISelectedItem,
   ISetSelectedCategory,
@@ -18,8 +22,25 @@ export interface ISuitCaseProps {
     item: ISelectedItem
   ) => IDeleteTravelItem;
   addTravelCategory: (category: string) => IAddTravelCategory;
-  isDeleteModalVisible: boolean;
-  setDeleteModalVisibility: (isVisible: boolean) => IDeleteModalVisibility;
+  editTravelCategory: (
+    category: ISelectedCategory,
+    value: string
+  ) => IEditTravelCategory;
+
+  deleteTravelCategory: (category: ISelectedCategory) => IDeleteTravelCategory;
+  isEditCategoryModalVisible: boolean;
+  isDeleteCategoryModalVisible: boolean;
+  isDeleteItemModalVisible: boolean;
+  setEditCategoryModalVisibility: (
+    isVisible: boolean
+  ) => ISetEditCategoryModalVisibility;
+  setDeleteCategoryModalVisibility: (
+    isVisible: boolean
+  ) => ISetDeleteCategoryModalVisibility;
+  setDeleteItemModalVisibility: (
+    isVisible: boolean
+  ) => ISetDeleteItemModalVisibility;
+
   selectedItem: ISelectedItem;
   selectedCategory: ISelectedCategory;
   setSelectedCategory: (category: ISelectedCategory) => ISetSelectedCategory;

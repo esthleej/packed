@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
-const SuitcaseIcon = require('../../../images/logo.png') as string;
+const SuitcaseIcon = require('../../../images/icons/suitcase.svg') as string;
 
 const NavbarContainer = styled.div`
   background-color: #b3cdeb;

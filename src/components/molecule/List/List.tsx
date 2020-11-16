@@ -7,20 +7,21 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 
-import Input from '../../atom/Input/Input';
+import Menu from '../../atom/Menu/Menu';
+import Input from '../Input/Input';
 import Item from '../Item/Item';
 
-import { INPUT_TYPE } from '../../atom/Input/InputTypes';
+import { INPUT_TYPE } from '../Input/InputTypes';
 import { IListContainerStyled, IListProps } from './ListTypes';
 import { IStoreState } from '../../../redux/rootReducer';
-
-const ChevronUpIcon = require('../../../images/icons/chevron-up.svg') as string;
 
 import styled from 'styled-components';
 
 import {
   setSelectedCategory,
   setSelectedItem,
+  setEditCategoryModalVisibility,
+  setDeleteCategoryModalVisibility,
 } from '../../../redux/visibility/visibilityActions';
 
 import {
@@ -28,15 +29,19 @@ import {
   editTravelItem,
 } from '../../../redux/travel/travelActions';
 
+const ChevronUpIcon = require('../../../images/icons/chevron-up.svg') as string;
+
 const mapStateToProps = ({ visibility }: IStoreState) => ({
   selectedCategory: visibility.selectedCategory,
   selectedItem: visibility.selectedItem,
-  isDeleteModalVisible: visibility.isDeleteModalVisible,
+  isDeleteItemModalVisible: visibility.isDeleteItemModalVisible,
 });
 
 const mapDispatchToProps = {
   setSelectedCategory,
   setSelectedItem,
+  setEditCategoryModalVisibility,
+  setDeleteCategoryModalVisibility,
   addTravelItem,
   editTravelItem,
 };
@@ -50,7 +55,8 @@ const ListContainer = styled.div<IListContainerStyled>`
     border: 1px solid white;
     border-radius: 4px;
     cursor: pointer;
-
+    width: 100%;
+    margin-left: 24px;
     img {
       width: 20px;
       transition: 0.2s;
@@ -71,6 +77,7 @@ const ListContainer = styled.div<IListContainerStyled>`
     height: ${(props) => (props.accordion ? props.height : '0')};
     overflow: hidden;
     transition: all 0.3s;
+    margin: 0px 24px;
     hr {
       border-top: 1px solid #f0f0f0;
     }
@@ -86,6 +93,21 @@ const ListContainer = styled.div<IListContainerStyled>`
   }
 `;
 
+const CategoryContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .button {
+    visibility: hidden;
+    align-self: center;
+    align-items: center;
+  }
+  &:hover div {
+    visibility: visible;
+  }
+`;
+
 const List = ({
   list,
   category,
@@ -93,8 +115,10 @@ const List = ({
   setSelectedCategory,
   selectedItem,
   setSelectedItem,
-  isDeleteModalVisible,
-  setDeleteModalVisibility,
+  isDeleteItemModalVisible,
+  setDeleteItemModalVisibility,
+  setEditCategoryModalVisibility,
+  setDeleteCategoryModalVisibility,
   addTravelItem,
   editTravelItem,
 }: IListProps): ReactElement => {
@@ -155,8 +179,8 @@ const List = ({
           handleInputOpen={handleInputOpen}
           handleInputClose={handleInputClose}
           checked={isCompleted}
-          isDeleteModalVisible={isDeleteModalVisible}
-          setDeleteModalVisibility={setDeleteModalVisibility}
+          isDeleteItemModalVisible={isDeleteItemModalVisible}
+          setDeleteItemModalVisibility={setDeleteItemModalVisibility}
           editTravelItem={editTravelItem}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -177,19 +201,29 @@ const List = ({
           : `${defaultHeight}px`
       }
     >
-      <div className='title' onClick={handleAccordion}>
-        <h2>
-          {category.name}&nbsp;({completedItems}/{totalItems})
-        </h2>
-        <img alt='chevron-up' src={ChevronUpIcon} />
-      </div>
+      <CategoryContainer>
+        <div className='title' onClick={handleAccordion}>
+          <h2>
+            {category.name}&nbsp;({completedItems}/{totalItems})
+          </h2>
+          <img alt='chevron-up' src={ChevronUpIcon} />
+        </div>
+        <Menu
+          item={category}
+          setSelectedItem={setSelectedCategory}
+          setEditModalVisibility={setEditCategoryModalVisibility}
+          setDeleteModalVisibility={setDeleteCategoryModalVisibility}
+        />
+      </CategoryContainer>
 
       <div className='list' id={category.name}>
         {item}
         {selectedItem.name === `add-item-${category.name}` &&
         selectedCategory.name === category.name ? (
           <Input
-            type={INPUT_TYPE.CATEGORY}
+            type={INPUT_TYPE.DEFAULT}
+            placeholder='Add an item'
+            buttonText='Add Item'
             handleCancel={handleInputClose}
             handleEnter={handleAddItem}
             id={`add-item-${category.name}`}
@@ -197,6 +231,7 @@ const List = ({
         ) : (
           <button
             onClick={() => handleInputOpen(true, `add-item-${category.name}`)}
+            type='button'
           >
             + Add Item
           </button>

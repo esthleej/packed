@@ -25,24 +25,13 @@ const initState = {
       terminal: 'D4',
     },
   },
-  lists: [
-    {
-      category: 'clothes',
-      list: [
-        { item: '5 shirts', isCompleted: false, id: uuidv4() },
-        { item: '2 pants', isCompleted: false, id: uuidv4() },
-        { item: '1 cap', isCompleted: false, id: uuidv4() },
-      ],
-    },
-    {
-      category: 'electronics',
-      list: [{ item: 'hair dryer', isCompleted: false, id: uuidv4() }],
-    },
-  ],
+
+  lists: [],
 };
 
 const travelReducer = (state: ITravelState = initState, actions: Actions) => {
-  let lists = [...state.lists];
+  Object.freeze(state);
+  const lists = [...state.lists];
   let newList;
   switch (actions.type) {
     case Constants.ADD_TRAVEL_ITEM:
@@ -59,7 +48,7 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
       };
 
     case Constants.EDIT_TRAVEL_ITEM:
-      newList = state.lists[actions.payload.category.index].list.map((item) => {
+      newList = lists[actions.payload.category.index].list.map((item) => {
         if (actions.payload.item.name === item.item) {
           return {
             ...actions.payload.newItem,
@@ -81,11 +70,9 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
       };
 
     case Constants.DELETE_TRAVEL_ITEM:
-      newList = state.lists[actions.payload.category.index].list.filter(
-        ({ id }) => {
-          return actions.payload.item.id !== id;
-        }
-      );
+      newList = lists[actions.payload.category.index].list.filter(({ id }) => {
+        return actions.payload.item.id !== id;
+      });
 
       lists[actions.payload.category.index] = {
         category: actions.payload.category.name,
@@ -106,6 +93,28 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
       return {
         ...state,
         lists,
+      };
+
+    case Constants.EDIT_TRAVEL_CATEGORY:
+      lists[actions.payload.category.index] = {
+        ...lists[actions.payload.category.index],
+        category: actions.payload.newCategory,
+      };
+
+      return {
+        ...state,
+        lists,
+      };
+
+    case Constants.DELETE_TRAVEL_CATEGORY:
+      newList = lists.filter(({ category }, index) => {
+        return (
+          actions.payload.name !== category && actions.payload.index !== index
+        );
+      });
+      return {
+        ...state,
+        lists: newList,
       };
 
     case Constants.EDIT_TRAVEL_INFO:

@@ -5,7 +5,9 @@ import {
 } from '../../../redux/travel/travelTypes';
 
 import {
-  IDeleteModalVisibility,
+  ISetDeleteItemModalVisibility,
+  ISetEditCategoryModalVisibility,
+  ISetDeleteCategoryModalVisibility,
   ISelectedCategory,
   ISelectedItem,
   ISetSelectedCategory,
@@ -24,8 +26,16 @@ export interface IListProps {
   setSelectedCategory: (category: ISelectedCategory) => ISetSelectedCategory;
   selectedItem: ISelectedItem;
   setSelectedItem: (item: ISelectedItem) => ISetSelectedItem;
-  isDeleteModalVisible: boolean;
-  setDeleteModalVisibility: (isVisible: boolean) => IDeleteModalVisibility;
+  isDeleteItemModalVisible: boolean;
+  setDeleteItemModalVisibility: (
+    isVisible: boolean
+  ) => ISetDeleteItemModalVisibility;
+  setEditCategoryModalVisibility: (
+    isVisible: boolean
+  ) => ISetEditCategoryModalVisibility;
+  setDeleteCategoryModalVisibility: (
+    isVisible: boolean
+  ) => ISetDeleteCategoryModalVisibility;
 
   addTravelItem: (category: ISelectedCategory, item: string) => IAddTravelItem;
   editTravelItem: (

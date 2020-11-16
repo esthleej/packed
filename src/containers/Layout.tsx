@@ -6,7 +6,7 @@ import { GlobalStyle, RebootStyle } from '../style';
 
 const Wrapper = styled.div`
   display: flex;
-  min-width: 270px;
+  min-width: 440px;
   align-items: center;
   flex-direction: column;
 `;

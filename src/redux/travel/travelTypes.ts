@@ -8,6 +8,8 @@ export enum Constants {
   EDIT_TRAVEL_ITEM = 'EDIT_TRAVEL_ITEM',
   DELETE_TRAVEL_ITEM = 'DELETE_TRAVEL_ITEM',
   ADD_TRAVEL_CATEGORY = 'ADD_TRAVEL_CATEGORY',
+  EDIT_TRAVEL_CATEGORY = 'EDIT_TRAVEL_CATEGORY',
+  DELETE_TRAVEL_CATEGORY = 'DELETE_TRAVEL_CATEGORY',
   EDIT_TRAVEL_INFO = 'EDIT_TRAVEL_INFO',
 }
 
@@ -37,6 +39,20 @@ export interface IAddTravelCategory {
   type: Constants.ADD_TRAVEL_CATEGORY;
   payload: string;
 }
+
+export interface IEditTravelCategory {
+  type: Constants.EDIT_TRAVEL_CATEGORY;
+  payload: {
+    category: ISelectedCategory;
+    newCategory: string;
+  };
+}
+
+export interface IDeleteTravelCategory {
+  type: Constants.DELETE_TRAVEL_CATEGORY;
+  payload: ISelectedCategory;
+}
+
 export interface IEditTravelInfo {
   type: Constants.EDIT_TRAVEL_INFO;
   payload: ITravelInfo;
@@ -47,6 +63,8 @@ export type Actions =
   | IEditTravelItem
   | IDeleteTravelItem
   | IAddTravelCategory
+  | IEditTravelCategory
+  | IDeleteTravelCategory
   | IEditTravelInfo;
 
 export interface ITravelInfo {

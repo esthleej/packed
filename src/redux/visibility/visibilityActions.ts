@@ -1,17 +1,37 @@
 import {
   Constants,
-  IDeleteModalVisibility,
+  ISetEditCategoryModalVisibility,
+  ISetDeleteCategoryModalVisibility,
+  ISetDeleteItemModalVisibility,
   ISetSelectedCategory,
   ISelectedCategory,
   ISetSelectedItem,
   ISelectedItem,
 } from './visibilityTypes';
 
-export const setDeleteModalVisibility = (
+export const setEditCategoryModalVisibility = (
   isVisible: boolean
-): IDeleteModalVisibility => {
+): ISetEditCategoryModalVisibility => {
   return {
-    type: Constants.SET_DELETE_MODAL_VISIBILITY,
+    type: Constants.SET_EDIT_CATEGORY_MODAL_VISIBILITY,
+    payload: isVisible,
+  };
+};
+
+export const setDeleteCategoryModalVisibility = (
+  isVisible: boolean
+): ISetDeleteCategoryModalVisibility => {
+  return {
+    type: Constants.SET_DELETE_CATEGORY_MODAL_VISIBILITY,
+    payload: isVisible,
+  };
+};
+
+export const setDeleteItemModalVisibility = (
+  isVisible: boolean
+): ISetDeleteItemModalVisibility => {
+  return {
+    type: Constants.SET_DELETE_ITEM_MODAL_VISIBILITY,
     payload: isVisible,
   };
 };

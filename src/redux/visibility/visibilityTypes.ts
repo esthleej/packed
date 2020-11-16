@@ -1,11 +1,23 @@
 export enum Constants {
-  SET_DELETE_MODAL_VISIBILITY = 'SET_DELETE_MODAL_VISIBILITY',
+  SET_EDIT_CATEGORY_MODAL_VISIBILITY = 'SET_EDIT_CATEGORY_MODAL_VISIBILITY',
+  SET_DELETE_CATEGORY_MODAL_VISIBILITY = 'SET_DELETE_CATEGORY_MODAL_VISIBILITY',
+  SET_DELETE_ITEM_MODAL_VISIBILITY = 'SET_DELETE_ITEM_MODAL_VISIBILITY',
   SET_SELECTED_CATEGORY = 'SET_SELECTED_CATEGORY',
   SET_SELECTED_ITEM = 'SET_SELECTED_ITEM',
 }
 
-export interface IDeleteModalVisibility {
-  type: Constants.SET_DELETE_MODAL_VISIBILITY;
+export interface ISetEditCategoryModalVisibility {
+  type: Constants.SET_EDIT_CATEGORY_MODAL_VISIBILITY;
+  payload: boolean;
+}
+
+export interface ISetDeleteCategoryModalVisibility {
+  type: Constants.SET_DELETE_CATEGORY_MODAL_VISIBILITY;
+  payload: boolean;
+}
+
+export interface ISetDeleteItemModalVisibility {
+  type: Constants.SET_DELETE_ITEM_MODAL_VISIBILITY;
   payload: boolean;
 }
 
@@ -31,12 +43,16 @@ export interface ISetSelectedItem {
 }
 
 export interface IVisibilityState {
-  readonly isDeleteModalVisible: boolean;
+  readonly isEditCategoryModalVisible: boolean;
+  readonly isDeleteCategoryModalVisible: boolean;
+  readonly isDeleteItemModalVisible: boolean;
   readonly selectedCategory: ISelectedCategory;
   readonly selectedItem: ISelectedItem;
 }
 
 export type Actions =
-  | IDeleteModalVisibility
+  | ISetEditCategoryModalVisibility
+  | ISetDeleteCategoryModalVisibility
+  | ISetDeleteItemModalVisibility
   | ISetSelectedCategory
   | ISetSelectedItem;

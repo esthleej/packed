@@ -1,8 +1,8 @@
 import React, { ReactElement, useState, SetStateAction, Dispatch } from 'react';
-import styled from 'styled-components';
-import Input from '../../atom/Input/Input';
+import Input from '../../molecule/Input/Input';
 import { IItemProps, ITextStyled } from './ItemTypes';
-import { INPUT_TYPE } from '../../atom/Input/InputTypes';
+import { INPUT_TYPE } from '../../molecule/Input/InputTypes';
+import styled from 'styled-components';
 
 const TrashIcon = require('../../../images/icons/trash.svg') as string;
 const EditIcon = require('../../../images/icons/pencil-alt.svg') as string;
@@ -96,8 +96,8 @@ const Item = ({
   setSelectedCategory,
   selectedItem,
   setSelectedItem,
-  isDeleteModalVisible,
-  setDeleteModalVisibility,
+  isDeleteItemModalVisible,
+  setDeleteItemModalVisibility,
   editTravelItem,
 }: IItemProps): ReactElement => {
   const [isCompleted, setCompleted]: [
@@ -111,7 +111,7 @@ const Item = ({
   };
 
   const handleDeleteVisibility = (): void => {
-    setDeleteModalVisibility(true);
+    setDeleteItemModalVisibility(true);
   };
 
   const handleEditVisibility = (): void => {
@@ -139,9 +139,11 @@ const Item = ({
 
   return selectedItem.id == id &&
     selectedCategory.name === category.name &&
-    isDeleteModalVisible === false ? (
+    isDeleteItemModalVisible === false ? (
     <Input
-      type={INPUT_TYPE.ITEM}
+      type={INPUT_TYPE.SECONDARY}
+      placeholder='Add an item'
+      buttonText='Add Item'
       handleCancel={handleInputClose}
       handleEnter={handleEditItem}
       id={item}
@@ -163,11 +165,11 @@ const Item = ({
       <Text strikeThrough={isCompleted} onClick={handleSelect}>
         <div>{item}</div>
         <div className='item-options'>
-          <button onClick={handleDeleteVisibility}>
-            <img alt='trash icon' src={TrashIcon} />
+          <button onClick={handleDeleteVisibility} type='button'>
+            <img alt='trash' src={TrashIcon} />
           </button>
-          <button onClick={handleEditVisibility}>
-            <img alt='edit icon' src={EditIcon} />
+          <button onClick={handleEditVisibility} type='button'>
+            <img alt='edit' src={EditIcon} />
           </button>
         </div>
       </Text>

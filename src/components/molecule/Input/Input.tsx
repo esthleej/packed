@@ -7,7 +7,7 @@ import React, {
   FormEvent,
   Dispatch,
 } from 'react';
-import Button from '../Button/Button';
+import Button from '../../atom/Button/Button';
 import { INPUT_TYPE, IInputContainerStyled, IInputProps } from './InputTypes';
 
 import styled from 'styled-components';
@@ -16,15 +16,15 @@ const CheckIcon = require('../../../images/icons/check.svg') as string;
 const XIcon = require('../../../images/icons/x.svg') as string;
 
 const InputContainer = styled.form<IInputContainerStyled>`
-  display: ${(props) => (props.item ? 'flex' : 'inherit')};
+  display: ${(props) => (props.default ? 'inherit' : 'flex')};
   input {
     width: 100%;
-    border: ${(props) => (props.item ? '1px solid #fff' : '1px solid #ddd')};
-    border-radius: ${(props) => (props.item ? 'none' : '5px')};
-    padding: ${(props) => (props.item ? 0 : '1rem')};
+    border: ${(props) => (props.default ? '1px solid #ddd' : '1px solid #fff')};
+    border-radius: ${(props) => (props.default ? '5px' : 'none')};
+    padding: ${(props) => (props.default ? '1rem' : 0)};
     cursor: text;
-    margin-bottom: ${(props) => (props.item ? 0 : '1rem')};
-    font-size: ${(props) => (props.item ? '2rem' : '1.5rem')};
+    margin-bottom: ${(props) => (props.default ? '1rem' : 0)};
+    font-size: ${(props) => (props.default ? '1.5rem' : '2rem')};
 
     :focus {
       outline: none;
@@ -47,6 +47,8 @@ const Input = ({
   type,
   id,
   text = '',
+  placeholder,
+  buttonText,
   handleCancel,
   handleEnter,
 }: IInputProps): ReactElement => {
@@ -77,20 +79,26 @@ const Input = ({
   };
 
   return (
-    <InputContainer onSubmit={handleSubmit} item={type === INPUT_TYPE.ITEM}>
+    <InputContainer
+      onSubmit={handleSubmit}
+      default={type === INPUT_TYPE.DEFAULT}
+    >
       <input
-        placeholder={
-          type === INPUT_TYPE.CATEGORY ? 'Add a category' : 'Add an item'
-        }
+        placeholder={placeholder}
         onChange={handleChange}
         value={value}
         id={id}
       />
 
-      {type !== INPUT_TYPE.ITEM ? (
+      {type === INPUT_TYPE.DEFAULT ? (
         <div className='input-bottom'>
-          <Button onClick={handleSubmit} primary disabled={value === ''}>
-            {type === INPUT_TYPE.CATEGORY ? 'Add category' : 'Add item'}
+          <Button
+            onClick={handleSubmit}
+            primary
+            disabled={value === ''}
+            type='submit'
+          >
+            {buttonText}
           </Button>
           <Button
             style={{
@@ -99,6 +107,7 @@ const Input = ({
             onClick={() => {
               handleCancel(false);
             }}
+            type='button'
           >
             Cancel
           </Button>
@@ -106,7 +115,7 @@ const Input = ({
       ) : (
         <div className='input-bottom'>
           <button disabled={value === ''} type='submit'>
-            <img alt='save-icon' src={CheckIcon} />
+            <img alt='save' src={CheckIcon} />
           </button>
 
           <button
@@ -114,7 +123,7 @@ const Input = ({
               handleCancel(false);
             }}
           >
-            <img alt='cancel-icon' src={XIcon} />
+            <img alt='cancel' src={XIcon} />
           </button>
         </div>
       )}

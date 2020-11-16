@@ -33,6 +33,7 @@ const Button = ({
   disabled = false,
   style,
   children,
+  type,
 }: IButtonProps): ReactElement => {
   return (
     <ButtonStyled
@@ -41,6 +42,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       style={style}
+      type={type}
     >
       {children}
     </ButtonStyled>

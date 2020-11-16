@@ -62,6 +62,7 @@ const TripInfoContainer = styled.div`
     padding: 1rem;
     padding: 0rem;
     margin-top: 0.5rem;
+    margin: 0.5rem 24px 0rem 24px;
     .dates {
       display: flex;
       justify-content: space-between;
@@ -85,7 +86,11 @@ const TripInfo = ({ travelInfo, editTravelInfo }: ITripInfo): ReactElement => {
       <div className='content'>
         <div className='content-top'>
           <h2>Trip Info</h2>
-          <button className='edit-btn' onClick={() => setEditOpen(true)}>
+          <button
+            type='button'
+            className='edit-btn'
+            onClick={() => setEditOpen(true)}
+          >
             <img alt='edit' src={EditIcon} />
           </button>
         </div>

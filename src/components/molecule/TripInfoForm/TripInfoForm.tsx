@@ -184,13 +184,14 @@ const TripInfoForm = ({
       </div>
 
       <div className='flightInfo-btns'>
-        <Button primary onClick={handleEdit}>
+        <Button primary onClick={handleEdit} type='submit'>
           Edit Trip
         </Button>
         <Button
           style={{
             marginLeft: '2rem',
           }}
+          type='button'
           onClick={handleCancel}
         >
           Cancel
