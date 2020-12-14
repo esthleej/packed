@@ -65,7 +65,6 @@ const ListContainer = styled.div<IListContainerStyled>`
     }
 
     h2 {
-      text-transform: capitalize;
       font-size: 2rem;
       font-weight: 500;
     }
@@ -153,7 +152,7 @@ const List = ({
   const handleInputClose = (): void => {
     setInputHeight(0);
     setSelectedItem({ name: '' });
-    setSelectedCategory({ name: '', index: 0 });
+    setSelectedCategory({ name: '', index: 0, categoryId: '' });
   };
 
   const handleAddItem = (value: string): void => {
@@ -168,12 +167,12 @@ const List = ({
     }
   };
 
-  const item = list.map(({ item, isCompleted, id }, index) => {
+  const item = list.map(({ item, isCompleted, itemId }, index) => {
     return (
-      <Fragment key={id}>
+      <Fragment key={itemId}>
         <Item
           category={category}
-          id={id}
+          itemId={itemId}
           item={item}
           index={index}
           handleInputOpen={handleInputOpen}
@@ -196,7 +195,7 @@ const List = ({
     <ListContainer
       accordion={isAccordionOpen}
       height={
-        selectedCategory.name === category.name
+        selectedCategory.categoryId === category.categoryId
           ? `${heightWithInput}px`
           : `${defaultHeight}px`
       }
@@ -219,7 +218,7 @@ const List = ({
       <div className='list' id={category.name}>
         {item}
         {selectedItem.name === `add-item-${category.name}` &&
-        selectedCategory.name === category.name ? (
+        selectedCategory.categoryId === category.categoryId ? (
           <Input
             type={INPUT_TYPE.DEFAULT}
             placeholder='Add an item'
