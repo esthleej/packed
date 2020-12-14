@@ -6,11 +6,12 @@ const initState = {
   isDeleteItemModalVisible: false,
 
   selectedCategory: {
+    categoryId: '',
     name: '',
     index: 0,
   },
   selectedItem: {
-    id: '',
+    itemId: '',
     name: '',
     index: 0,
   },

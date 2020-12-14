@@ -36,7 +36,7 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
   switch (actions.type) {
     case Constants.ADD_TRAVEL_ITEM:
       const newItem: IListItemDetail = {
-        id: uuidv4(),
+        itemId: uuidv4(),
         item: actions.payload.item,
         isCompleted: false,
       };
@@ -49,10 +49,10 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
 
     case Constants.EDIT_TRAVEL_ITEM:
       newList = lists[actions.payload.category.index].list.map((item) => {
-        if (actions.payload.item.name === item.item) {
+        if (actions.payload.item.itemId === item.itemId) {
           return {
             ...actions.payload.newItem,
-            id: item.id,
+            itemId: item.itemId,
           };
         } else {
           return item;
@@ -60,6 +60,7 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
       });
 
       lists[actions.payload.category.index] = {
+        ...lists[actions.payload.category.index],
         category: actions.payload.category.name,
         list: newList,
       };
@@ -70,11 +71,14 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
       };
 
     case Constants.DELETE_TRAVEL_ITEM:
-      newList = lists[actions.payload.category.index].list.filter(({ id }) => {
-        return actions.payload.item.id !== id;
-      });
+      newList = lists[actions.payload.category.index].list.filter(
+        ({ itemId }) => {
+          return actions.payload.item.itemId !== itemId;
+        }
+      );
 
       lists[actions.payload.category.index] = {
+        ...lists[actions.payload.category.index],
         category: actions.payload.category.name,
         list: newList,
       };
@@ -86,6 +90,7 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
 
     case Constants.ADD_TRAVEL_CATEGORY:
       const newCategory: IListItem = {
+        categoryId: uuidv4(),
         category: actions.payload,
         list: [],
       };
@@ -107,10 +112,8 @@ const travelReducer = (state: ITravelState = initState, actions: Actions) => {
       };
 
     case Constants.DELETE_TRAVEL_CATEGORY:
-      newList = lists.filter(({ category }, index) => {
-        return (
-          actions.payload.name !== category && actions.payload.index !== index
-        );
+      newList = lists.filter(({ categoryId }) => {
+        return actions.payload.categoryId !== categoryId;
       });
       return {
         ...state,

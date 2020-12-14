@@ -119,11 +119,11 @@ function Suitcase({
 
   const list =
     lists.length !== 0 ? (
-      lists.map(({ category, list }, index) => {
+      lists.map(({ category, list, categoryId }, index) => {
         return (
-          <Category key={category}>
+          <Category key={categoryId}>
             <List
-              category={{ name: category, index }}
+              category={{ name: category, categoryId, index }}
               list={list}
               setDeleteItemModalVisibility={setDeleteItemModalVisibility}
             />

@@ -82,14 +82,15 @@ export interface ITravelInfoFlight {
 }
 
 export interface IListItem {
+  categoryId: string;
   category: string;
   list: IListItemDetail[];
 }
 
 export interface IListItemDetail {
+  itemId: string;
   item: string;
   isCompleted: boolean;
-  id: string;
 }
 
 export interface ITravelState {

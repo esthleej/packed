@@ -14,7 +14,7 @@ export interface ITextStyled {
 export interface IItemProps {
   category: ISelectedCategory;
   index: number;
-  id: string;
+  itemId: string;
   item: string;
   checked: boolean;
 

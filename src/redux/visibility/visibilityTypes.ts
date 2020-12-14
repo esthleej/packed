@@ -27,12 +27,13 @@ export interface ISetSelectedCategory {
 }
 
 export type ISelectedCategory = {
+  categoryId?: number | string | null;
   name: string;
   index: number;
 };
 
 export type ISelectedItem = {
-  id?: number | string | null;
+  itemId?: number | string | null;
   name: string;
   index?: number | null;
 };

@@ -87,7 +87,7 @@ const Text = styled.div<ITextStyled>`
 const Item = ({
   category,
   index,
-  id,
+  itemId,
   item,
   checked,
   handleInputOpen,
@@ -106,7 +106,7 @@ const Item = ({
   ] = useState<boolean>(checked);
 
   const handleSelect = (): void => {
-    setSelectedItem({ name: item, id, index });
+    setSelectedItem({ name: item, itemId, index });
     setSelectedCategory(category);
   };
 
@@ -121,7 +121,7 @@ const Item = ({
   const handleCheckItem = (): void => {
     editTravelItem(
       category,
-      { name: item, id },
+      { name: item, itemId },
       {
         item: item,
         isCompleted: !isCompleted,
@@ -137,7 +137,7 @@ const Item = ({
     });
   };
 
-  return selectedItem.id == id &&
+  return selectedItem.itemId == itemId &&
     selectedCategory.name === category.name &&
     isDeleteItemModalVisible === false ? (
     <Input
@@ -155,11 +155,11 @@ const Item = ({
         <input
           type='checkbox'
           value={item}
-          id={id}
+          id={itemId}
           onClick={handleCheckItem}
           defaultChecked={isCompleted}
         />
-        <label htmlFor={id} />
+        <label htmlFor={itemId} />
       </CheckBox>
 
       <Text strikeThrough={isCompleted} onClick={handleSelect}>
