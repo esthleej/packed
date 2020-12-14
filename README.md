@@ -1,7 +1,7 @@
 # 🧳 packed
 
-An app that allows you to create an organized packing list for your travels!
-Built using Typecsript + Next.js + React/Redux + Styled Components.
+An app that allows you to create an organized packing list for your travels!\
+Built using Typescript + Next.js + React/Redux + Styled Components.
 
 Here is the live **[demo](https://packed-two.vercel.app/)**.
 
